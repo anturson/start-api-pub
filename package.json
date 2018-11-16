@@ -6,12 +6,11 @@
   "scripts": {
     "prebuild": "npm-run-all clean-dist test lint",
     "build": "babel src -d dist",
+    "postbuild": "node dist/index.js",
     "clean-dist": "rimraf ./dist && mkdir dist",
     "start": "npm-run-all --parallel lint:watch test:watch start-watch",
     "start-watch": "nodemon src/index.js --exec babel-node",
-    "build-prod": "babel src -d dist",
-    "serve": "node dist/index.js",
-    "start-prod": "npm-run-all build serve",
+    "start-prod": "babel src -d dist && node dist/index.js",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress \"src/**/**.test.js\" --require @babel/register",
@@ -32,6 +31,9 @@
   },
   "homepage": "https://github.com/anturson/start-api-pub#readme",
   "dependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -39,10 +41,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
     "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.4",
     "chai": "^4.2.0",
