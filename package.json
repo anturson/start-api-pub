@@ -10,6 +10,7 @@
     "start": "npm-run-all --parallel lint:watch test:watch start-watch",
     "start-watch": "nodemon src/index.js --exec babel-node",
     "serve": "node dist/index.js",
+    "start-prod": "npm-run-all build serve",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress \"src/**/**.test.js\" --require @babel/register",
