@@ -4,7 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm-run-all --parallel lint:watch test:watch start-index",
+    "share": "npm-run-all --parallel start-index localtunnel",
+    "start-index": "babel-node src/index.js",
+    "heroku-create": "heroku create",
+    "heroku-remote": "heroku git:remote -a sleepy-dusk-61958",
+    "heroku-deploy": "git push heroku master",
+    "localtunnel": "lt --port 3000",
+    "lint": "esw src build-scripts",
+    "lint:watch": "npm run lint -- --watch",
+    "test": "mocha --reporter progress build-scripts/test-setup.js \"src/**/**.test.js\"",
+    "test:watch": "npm run test -- --watch",
+    "generate-mock-data": "babel-node build-scripts/generate-mock-data"
   },
   "repository": {
     "type": "git",
@@ -18,8 +29,27 @@
   },
   "homepage": "https://github.com/anturson/start-api-pub#readme",
   "dependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "chai": "^4.2.0",
+    "chalk": "^2.4.1",
+    "compression": "^1.7.3",
     "cors": "^2.8.5",
-    "express": "^4.16.4"
+    "eslint": "^5.9.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-watch": "^4.0.2",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "json-schema-faker": "^0.5.0-rc16",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.3",
+    "numeral": "^2.0.6",
+    "open": "0.0.5",
+    "path": "^0.12.7",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {}
 }
