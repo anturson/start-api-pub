@@ -1,3 +1,5 @@
+import { describe, it } from 'mocha';
+
 import { expect } from 'chai';
 // import fs from 'fs';
 
@@ -15,5 +17,5 @@ describe.skip('index.html', () => {
     // expect(h1.innerHTML).to.equal('Users');
     done();
     // window.close();
-  })
-})
+  });
+});
